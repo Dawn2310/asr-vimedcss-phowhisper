@@ -23,10 +23,11 @@ def main():
     ap.add_argument('--run-id', default='local_v1')
     ap.add_argument('--data-dir', default=str(ROOT / 'data'))
     ap.add_argument('--checkpoint')
-    ap.add_argument('--split', default='dev', choices=['dev', 'test', 'hard'])
+    ap.add_argument('--split', default='dev', choices=['dev', 'test', 'hard', 'probe'])
     ap.add_argument('--allow-test', action='store_true')
     ap.add_argument('--max-per-source', type=int)
     ap.add_argument('--smoke', action='store_true')
+    ap.add_argument('--probe-steps', type=int, help='stop after N optimizer steps at the real batch size, with one eval (timing/VRAM check)')
     ap.add_argument('--duty-cycle', type=float, help='override profile gpu_duty_cycle for this run (kept in manifest)')
     args = ap.parse_args()
     args.data_dir = str(Path(args.data_dir).resolve())
@@ -48,11 +49,12 @@ def main():
     run.mkdir(parents=True, exist_ok=True)
     required = ['train', 'dev'] if args.mode == 'train' else [args.split]
     sources = list(cfg['data']['train_sources']) if args.mode == 'train' else cfg['data']['eval_sources']
-    if args.mode == 'eval' and args.split == 'hard':  # only ViMedCSS sources define a HARD split
+    if args.mode == 'eval' and args.split in ('hard', 'probe'):  # only ViMedCSS sources define these splits
         sources = [s for s in sources if (Path(args.data_dir) / s / 'hard.parquet').is_file()]
     missing =[str(Path(args.data_dir) / source / f'{split}.parquet')
                for source in sources for split in required
-               if not (Path(args.data_dir) / source / f'{split}.parquet').is_file()]
+               if not (Path(args.data_dir) / source / f'{split}.parquet').is_file()
+               and not (split == 'dev' and (Path(args.data_dir) / source / 'probe.parquet').is_file())]  # leak study: no DEV by design
     import importlib.metadata
     status = dict(python=sys.executable, cuda=torch.cuda.is_available(),
                   versions={p: importlib.metadata.version(p) for p in
@@ -167,8 +169,11 @@ def main():
             accum = profile['grad_accum'] * profile['batch_size'] // batch
             conf['train'].update(batch_size=batch, grad_accum=accum,
                                  num_workers=0, fp16=True, gradient_checkpointing=True,
+                                 eval_batch_size=conf['train'].get('local_eval_batch_size', conf['train'].get('eval_batch_size')),
                                  save_steps=steps, eval_steps=steps,
                                  save_total_limit=profile['save_total_limit'], logging_steps=5)
+            if args.probe_steps:
+                conf['train'].update(save_steps=args.probe_steps, eval_steps=args.probe_steps)
         return conf, run
 
     config.load_experiment = local_config
@@ -239,7 +244,7 @@ def main():
     try:
         if args.mode == 'train':
             from local_train import run_training
-            run_training(resolved, run, ResourceCallback(), args.smoke)
+            run_training(resolved, run, ResourceCallback(), args.smoke, args.probe_steps)
         else:
             runpy.run_path(sys.argv[0], run_name='__main__')
     finally:

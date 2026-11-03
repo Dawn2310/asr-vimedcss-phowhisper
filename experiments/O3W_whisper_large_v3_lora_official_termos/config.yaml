@@ -1,0 +1,41 @@
+# O3W — O2 + resampling against the long tail of medical terms: ViMedCSS TRAIN clips holding a term seen <= 5 times
+# are repeated 3x in total (asr/data.py::_oversample_rare_terms). One variable vs O2.
+model:
+  name: openai/whisper-large-v3
+  lora:
+    r: 32
+    alpha: 64
+    dropout: 0.05
+    target_modules: [q_proj, k_proj, v_proj, out_proj, fc1, fc2]
+  spec_augment:
+    mask_time_prob: 0.05
+    mask_time_length: 10
+    mask_feature_prob: 0.05
+    mask_feature_length: 10
+
+data:
+  train_exclude: v3_train_exclude.json   # silent clips and labels denser than 16 tokens/s (ids are split-independent)
+  term_oversample:
+    source: ViMedCSS
+    max_count: 5
+    repeat: 3
+
+train:
+  epochs: 2
+  batch_size: 32
+  grad_accum: 1              # effective batch 32, as V1-V5
+  lr: 1.0e-4                 # large model: half of V5's 2e-4 (V1 at 1e-3 diverged)
+  warmup_ratio: 0.05
+  fp16: false
+  bf16: true                 # A100
+  gradient_checkpointing: true
+  eval_strategy: epoch       # evaluates after the last epoch too
+  save_total_limit: 2
+  logging_steps: 25
+  num_workers: 8
+  eval_batch_size: 32
+
+eval:
+  silence_peak: 1.0e-3
+  max_tokens_per_second: 12
+  max_tokens_offset: 20

@@ -1,0 +1,47 @@
+# L_largev3_clean_s13 — leakage study (paper part A, scripts/build_leak_data.py), CLEAN TRAIN: no clip of any probe
+# video. Pair: L_largev3_leak_s13 (same everything except 722 TRAIN clips swapped for clips of probe_seen videos).
+# openai/whisper-large-v3, O2 recipe (lr 1e-4, 2 epochs), fixed recipe: no selection on the probe split, scored on it once (split 'probe' is locked).
+seed: 13
+
+model:
+  name: openai/whisper-large-v3
+  lora:
+    r: 32
+    alpha: 64
+    dropout: 0.05
+    target_modules: [q_proj, k_proj, v_proj, out_proj, fc1, fc2]
+  spec_augment:
+    mask_time_prob: 0.05
+    mask_time_length: 10
+    mask_feature_prob: 0.05
+    mask_feature_length: 10
+
+data:
+  train_sources:
+    _replace: true
+    VIVOS: null
+    FLEURS: null
+    VietMed: null
+    ViMedCSS_vsplit: null
+  eval_sources: [VIVOS, FLEURS, VietMed, ViMedCSS_leak]   # dev: the 3 other sources (ViMedCSS_leak has no dev); probe: ViMedCSS_leak only
+  train_exclude: v3_train_exclude.json
+
+train:
+  epochs: 2
+  batch_size: 32
+  grad_accum: 1              # effective batch 32, as V1-V5
+  lr: 1.0e-4
+  warmup_ratio: 0.05
+  fp16: false
+  bf16: true                 # A100
+  gradient_checkpointing: false   # A100 80 GB: speed only, same gradients as O3W's checkpointed run
+  eval_strategy: epoch       # evaluates after the last epoch too
+  save_total_limit: 2
+  logging_steps: 25
+  num_workers: 8
+  eval_batch_size: 32
+
+eval:
+  silence_peak: 1.0e-3
+  max_tokens_per_second: 12
+  max_tokens_offset: 20

@@ -1,0 +1,47 @@
+# C1 — O3W + term-prompt training (paper part C): Whisper's previous-text prompt lists medical terms (the clip's own
+# terms mixed with distractors), so at test time a term list (scripts/evaluate.py --bias) can steer the decoder toward
+# rare and unseen terms (HARD: 279 of its 338 terms never occur in the official TRAIN). One variable vs O3W.
+model:
+  name: openai/whisper-large-v3
+  lora:
+    r: 32
+    alpha: 64
+    dropout: 0.05
+    target_modules: [q_proj, k_proj, v_proj, out_proj, fc1, fc2]
+  spec_augment:
+    mask_time_prob: 0.05
+    mask_time_length: 10
+    mask_feature_prob: 0.05
+    mask_feature_length: 10
+
+data:
+  train_exclude: v3_train_exclude.json   # silent clips and labels denser than 16 tokens/s (ids are split-independent)
+  term_oversample:
+    source: ViMedCSS
+    max_count: 5
+    repeat: 3
+  term_prompt:               # asr/data.py::TermPrompter
+    p: 0.5                   # half of the clips get a term-list prompt
+    max_distractors: 30      # + 0..30 random TRAIN-vocabulary terms (non-ViMedCSS clips: distractors only)
+    gold_keep: 0.9           # each of the clip's own terms is listed with probability 0.9
+    max_tokens: 160          # prompt length cap (Whisper allows 223)
+
+train:
+  epochs: 2
+  batch_size: 32
+  grad_accum: 1              # effective batch 32, as V1-V5
+  lr: 1.0e-4                 # large model: half of V5's 2e-4 (V1 at 1e-3 diverged)
+  warmup_ratio: 0.05
+  fp16: false
+  bf16: true                 # A100
+  gradient_checkpointing: false   # A100 80 GB: speed only, same gradients as O3W's checkpointed run
+  eval_strategy: epoch       # evaluates after the last epoch too
+  save_total_limit: 2
+  logging_steps: 25
+  num_workers: 8
+  eval_batch_size: 32
+
+eval:
+  silence_peak: 1.0e-3
+  max_tokens_per_second: 12
+  max_tokens_offset: 20

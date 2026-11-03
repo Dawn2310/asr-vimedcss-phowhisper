@@ -1,0 +1,4 @@
+# B3 — Whisper-large-v3 zero-shot on the OFFICIAL splits, plain greedy (no guard), to reproduce the ViMedCSS paper
+# row (TEST WER 34.47, CS-WER 46.69: the best zero-shot CS-WER there). Colab/A100.
+model:
+  name: openai/whisper-large-v3

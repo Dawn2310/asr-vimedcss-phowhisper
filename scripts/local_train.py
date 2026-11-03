@@ -12,7 +12,7 @@ from asr.metrics import compute_metrics
 from asr.model import load_model
 
 
-def run_training(cfg, run, callback, smoke=False):
+def run_training(cfg, run, callback, smoke=False, max_steps=None):
     set_seed(cfg['seed'])
     t, ev = cfg['train'], cfg['eval']
     model, processor = load_model(cfg, for_training=True)
@@ -34,7 +34,7 @@ def run_training(cfg, run, callback, smoke=False):
     ckpt = run / 'checkpoints'
     args = Seq2SeqTrainingArguments(
         output_dir=str(ckpt), seed=cfg['seed'], data_seed=cfg['seed'],
-        num_train_epochs=t['epochs'], max_steps=2 if smoke else -1,
+        num_train_epochs=t['epochs'], max_steps=2 if smoke else max_steps or -1,
         per_device_train_batch_size=1 if smoke else t['batch_size'],
         per_device_eval_batch_size=t.get('eval_batch_size', 1),
         gradient_accumulation_steps=1 if smoke else t['grad_accum'],

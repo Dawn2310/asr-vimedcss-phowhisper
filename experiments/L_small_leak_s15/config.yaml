@@ -1,0 +1,51 @@
+# L_small_leak_s15 — leakage study (paper part A), LEAKY TRAIN: 722 vsplit TRAIN clips (leak_train_exclude.json)
+# replaced by 722 clips of the probe_seen videos (ViMedCSS_leak/train). Pair: L_small_clean_s15.
+# vinai/PhoWhisper-small, V4 recipe (lr 3e-4, 3 epochs), fixed recipe: no selection on the probe split, scored on it once (split 'probe' is locked).
+seed: 15
+
+model:
+  name: vinai/PhoWhisper-small
+  lora:
+    r: 32
+    alpha: 64
+    dropout: 0.05
+    target_modules: [q_proj, k_proj, v_proj, out_proj, fc1, fc2]
+  spec_augment:
+    mask_time_prob: 0.05
+    mask_time_length: 10
+    mask_feature_prob: 0.05
+    mask_feature_length: 10
+
+data:
+  train_sources:
+    _replace: true
+    VIVOS: null
+    FLEURS: null
+    VietMed: null
+    ViMedCSS_vsplit: null
+    ViMedCSS_leak: null        # L: other clips of the probe_seen videos
+  eval_sources: [VIVOS, FLEURS, VietMed, ViMedCSS_leak]   # dev: the 3 other sources (ViMedCSS_leak has no dev); probe: ViMedCSS_leak only
+  train_exclude: leak_train_exclude.json  # v3 exclusions + the 722 clips dropped for the size match
+
+train:
+  epochs: 3
+  batch_size: 32
+  grad_accum: 1              # effective batch 32, as V1-V5
+  lr: 3.0e-4
+  warmup_ratio: 0.05
+  fp16: false
+  bf16: true                 # A100
+  gradient_checkpointing: false
+  eval_strategy: epoch       # evaluates after the last epoch too
+  save_total_limit: 2
+  logging_steps: 25
+  local_eval_steps: 934      # laptop: 29913 clips // 32 = 934 steps per epoch, so the last eval is the final step (2802)
+  local_batch_size: 4        # laptop: 4 x accum 8 = effective batch 32; measured 8.5 s/step, 3.35 GB total GPU
+  local_eval_batch_size: 8   # as V4 on the laptop
+  num_workers: 8
+  eval_batch_size: 32
+
+eval:
+  silence_peak: 1.0e-3
+  max_tokens_per_second: 12
+  max_tokens_offset: 20

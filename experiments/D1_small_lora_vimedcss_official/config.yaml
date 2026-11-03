@@ -1,0 +1,42 @@
+# D1_small_lora_vimedcss_official — data-source ablation on the OFFICIAL split (paper part B). PhoWhisper-small + LoRA on ViMedCSS TRAIN only: the setting of the paper's 'PhoWhisper-Small + LoRA' (TEST 27.13),
+# so the gap to the paper is measured without our three extra sources.
+# vinai/PhoWhisper-small, V4 recipe (lr 3e-4, 3 epochs), fixed recipe; official DEV/TEST/HARD scored once each.
+model:
+  name: vinai/PhoWhisper-small
+  lora:
+    r: 32
+    alpha: 64
+    dropout: 0.05
+    target_modules: [q_proj, k_proj, v_proj, out_proj, fc1, fc2]
+  spec_augment:
+    mask_time_prob: 0.05
+    mask_time_length: 10
+    mask_feature_prob: 0.05
+    mask_feature_length: 10
+
+data:
+  train_sources:
+    _replace: true
+    ViMedCSS: null
+  eval_sources: [ViMedCSS]
+  train_exclude: v3_train_exclude.json   # silent clips and labels denser than 16 tokens/s (ids are split-independent)
+
+train:
+  epochs: 3
+  batch_size: 32
+  grad_accum: 1              # effective batch 32, as V1-V5
+  lr: 3.0e-4
+  warmup_ratio: 0.05
+  fp16: false
+  bf16: true                 # A100
+  gradient_checkpointing: false
+  eval_strategy: epoch       # evaluates after the last epoch too
+  save_total_limit: 2
+  logging_steps: 25
+  num_workers: 8
+  eval_batch_size: 32
+
+eval:
+  silence_peak: 1.0e-3
+  max_tokens_per_second: 12
+  max_tokens_offset: 20

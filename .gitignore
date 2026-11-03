@@ -14,6 +14,7 @@ local/models/
 local/context/
 local/gpu.lock
 colab_transfer/
+colab_results/
 *.cookies.txt
 *.zip
 *.safetensors

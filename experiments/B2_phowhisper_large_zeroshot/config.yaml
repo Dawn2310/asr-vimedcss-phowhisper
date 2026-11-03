@@ -1,0 +1,4 @@
+# B2 — PhoWhisper-large zero-shot on the OFFICIAL splits, plain greedy (no guard), to reproduce the ViMedCSS paper
+# row (TEST WER 31.24, CS-WER 55.05) and calibrate our scoring against it. Colab/A100.
+model:
+  name: vinai/PhoWhisper-large
