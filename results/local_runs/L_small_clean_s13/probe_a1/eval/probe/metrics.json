@@ -1,0 +1,63 @@
+{
+  "overall": {
+    "n_utts": 2218,
+    "n_empty_refs_skipped": 0,
+    "wer": 0.16012302284710017,
+    "cer": 0.11573961431901485,
+    "ref_words": 56900,
+    "substitutions": 5582,
+    "deletions": 2197,
+    "insertions": 1332,
+    "cs_terms_total": 2331,
+    "cs_term_recall": 0.6211926211926212,
+    "audio_hours": 4.256388888888889,
+    "n_silent": 0,
+    "n_truncated": 3
+  },
+  "by_source": {
+    "ViMedCSS_probe_seen": {
+      "n_utts": 809,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.17995410097784872,
+      "cer": 0.1294817598246438,
+      "ref_words": 20044,
+      "substitutions": 2308,
+      "deletions": 791,
+      "insertions": 508,
+      "cs_terms_total": 842,
+      "cs_term_recall": 0.6045130641330166,
+      "audio_hours": 1.5094444444444444,
+      "n_silent": 0,
+      "n_truncated": 0
+    },
+    "ViMedCSS_probe_unseen": {
+      "n_utts": 1409,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.14933796396787496,
+      "cer": 0.1083105608086866,
+      "ref_words": 36856,
+      "substitutions": 3274,
+      "deletions": 1406,
+      "insertions": 824,
+      "cs_terms_total": 1489,
+      "cs_term_recall": 0.6306245802552048,
+      "audio_hours": 2.7469444444444444,
+      "n_silent": 0,
+      "n_truncated": 3
+    }
+  },
+  "rtf_decode_only": 0.09515495741043006,
+  "checkpoint": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\local\\runs\\L_small_clean_s13\\local_a1\\final",
+  "decode": {
+    "num_beams": 1,
+    "batch_size": 1,
+    "dtype": "torch.float16",
+    "device": "cuda",
+    "silence_peak": 0.001,
+    "max_tokens_per_second": 12,
+    "max_tokens_offset": 20,
+    "bias": null,
+    "distractors": null,
+    "lexicon": null
+  }
+}

@@ -1,0 +1,5 @@
+group,clips,hours,words_per_clip,words_per_sec,term_occ_per_clip,distinct_terms,same_text_in_clean,same_text_in_leaky,term_occ_in_clean_vocab,term_occ_in_leaky_vocab
+added to leaky TRAIN,722,1.409,26.143,3.72,1.048,210,,,,
+dropped from leaky TRAIN,722,1.418,26.792,3.791,1.037,306,,,,
+probe_seen,809,1.509,24.776,3.689,1.041,213,25.0,31.0,802.0,828.0
+probe_unseen,1409,2.747,26.158,3.727,1.057,222,23.0,27.0,1390.0,1390.0

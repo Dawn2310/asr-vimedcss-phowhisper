@@ -1,0 +1,33 @@
+{
+ "seed": 13,
+ "pool": "vsplit dev+test videos with >= 2 clips",
+ "leak_share_of_seen_videos": 0.5,
+ "leak_train": {
+  "clips": 722,
+  "videos": 192,
+  "hours": 1.409
+ },
+ "probe_seen": {
+  "clips": 809,
+  "videos": 192,
+  "hours": 1.509
+ },
+ "probe_unseen": {
+  "clips": 1409,
+  "videos": 179,
+  "hours": 2.747
+ },
+ "seen_videos_skipped_no_trainable_leak_clip": [],
+ "dropped_from_vsplit_train": {
+  "clips": 722,
+  "hours": 1.417
+ },
+ "id_sha256": {
+  "leak_train": "88825490bb1a0499670d836537904038b3562096913e840953f0f6643b5ea837",
+  "probe": "f1b7b60066d285511744b5b397730d7143f34b66b5fd9eab84cdb47d43589e27",
+  "dropped": "6ce3c1bdf95197dd5013edd8192d018f1846164c0040b0fd3ba48478604b80fa",
+  "vsplit_train": "f77e924768112f194b83d1a415256687d82144d4f767f0438276902c1dc26ffd",
+  "vsplit_dev": "ebb596ec72ac4b6f030d191161dca55471efaad6fe7a75015211eddd7ca302ae",
+  "vsplit_test": "721770c7fadb785ee7ff284ce2db865d20ca23f8226715ad60537791caea8dce"
+ }
+}

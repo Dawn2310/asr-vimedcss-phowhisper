@@ -1,0 +1,5 @@
+system,description,wer_FLEURS,wer_VIVOS,wer_ViMedCSS,wer_VietMed,wer_all
+B0,PhoWhisper-small zero-shot,12.1923,6.2808,28.025,25.1925,22.8672
+B2,PhoWhisper-large zero-shot,8.3565,4.6102,23.1375,24.0416,20.1797
+B3,Whisper-large-v3 zero-shot,8.3565,12.2766,29.615,73.9404,47.266
+O3W,"Whisper-large-v3 + LoRA + SpecAugment + rare-term oversampling, beam 5",6.9709,7.0319,11.3971,20.4338,14.9383

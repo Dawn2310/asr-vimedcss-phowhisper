@@ -1,0 +1,71 @@
+{
+  "overall": {
+    "n_utts": 5168,
+    "n_empty_refs_skipped": 0,
+    "wer": 0.18478575168608696,
+    "cer": 0.14364675789789108,
+    "ref_words": 127959,
+    "substitutions": 10344,
+    "deletions": 7626,
+    "insertions": 5675,
+    "cs_terms_total": 1813,
+    "cs_term_recall": 0.7126309983452841,
+    "audio_hours": 9.83113250301944
+  },
+  "by_source": {
+    "FLEURS": {
+      "n_utts": 359,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.11118657223246338,
+      "cer": 0.058129053534132134,
+      "ref_words": 10307,
+      "substitutions": 964,
+      "deletions": 91,
+      "insertions": 91,
+      "audio_hours": 1.1767000030146704
+    },
+    "VIVOS": {
+      "n_utts": 184,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.06923837784371908,
+      "cer": 0.02989192917912164,
+      "ref_words": 4044,
+      "substitutions": 262,
+      "deletions": 11,
+      "insertions": 7,
+      "audio_hours": 0.3292013888888889
+    },
+    "ViMedCSS": {
+      "n_utts": 1713,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.16097408120327678,
+      "cer": 0.11510260988184316,
+      "ref_words": 44678,
+      "substitutions": 4278,
+      "deletions": 1757,
+      "insertions": 1157,
+      "cs_terms_total": 1813,
+      "cs_term_recall": 0.7126309983452841,
+      "audio_hours": 3.366897777782546
+    },
+    "VietMed": {
+      "n_utts": 2912,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.2180037719425504,
+      "cer": 0.183277339732602,
+      "ref_words": 68930,
+      "substitutions": 4840,
+      "deletions": 5767,
+      "insertions": 4420,
+      "audio_hours": 4.958333333333333
+    }
+  },
+  "rtf_decode_only": 0.18138656162302338,
+  "checkpoint": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\local\\runs\\V1_phowhisper_small_lora\\local_v1\\final",
+  "decode": {
+    "num_beams": 1,
+    "batch_size": 1,
+    "dtype": "torch.float16",
+    "device": "cuda"
+  }
+}

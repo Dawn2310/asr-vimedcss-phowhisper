@@ -1,0 +1,45 @@
+{
+  "overall": {
+    "n_utts": 658,
+    "n_empty_refs_skipped": 0,
+    "wer": 0.3313978104397266,
+    "cer": 0.25040100748989197,
+    "ref_words": 16533,
+    "substitutions": 2586,
+    "deletions": 2223,
+    "insertions": 670,
+    "cs_terms_total": 758,
+    "cs_term_recall": 0.37994722955145116,
+    "audio_hours": 1.295,
+    "n_silent": 0,
+    "n_truncated": 2
+  },
+  "by_source": {
+    "ViMedCSS": {
+      "n_utts": 658,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.3313978104397266,
+      "cer": 0.25040100748989197,
+      "ref_words": 16533,
+      "substitutions": 2586,
+      "deletions": 2223,
+      "insertions": 670,
+      "cs_terms_total": 758,
+      "cs_term_recall": 0.37994722955145116,
+      "audio_hours": 1.295,
+      "n_silent": 0,
+      "n_truncated": 2
+    }
+  },
+  "rtf_decode_only": 0.024611361755469362,
+  "checkpoint": "openai/whisper-large-v3",
+  "decode": {
+    "num_beams": 1,
+    "batch_size": 16,
+    "dtype": "torch.float16",
+    "device": "cuda",
+    "silence_peak": null,
+    "max_tokens_per_second": null,
+    "max_tokens_offset": null
+  }
+}

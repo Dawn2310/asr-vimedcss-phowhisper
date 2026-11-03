@@ -1,0 +1,178 @@
+{
+ "frozen_at": "2026-10-30T08:17:23",
+ "final_system": "V5B_phowhisper_medium_lora_vsplit_specaug_beam5",
+ "selection": "lowest full-DEV WER among candidates on the V3 DEV (ViMedCSS re-split by video); TEST not decoded yet",
+ "dev_reference_only": [
+  "B0V",
+  "V4",
+  "V4B"
+ ],
+ "resolved_config": {
+  "seed": 13,
+  "model": {
+   "name": "local/models/PhoWhisper-medium-fp16",
+   "language": "vi",
+   "task": "transcribe",
+   "lora": {
+    "r": 32,
+    "alpha": 64,
+    "dropout": 0.05,
+    "target_modules": [
+     "q_proj",
+     "k_proj",
+     "v_proj",
+     "out_proj",
+     "fc1",
+     "fc2"
+    ]
+   },
+   "dtype": "float16"
+  },
+  "data": {
+   "dir": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\data",
+   "normalize_text": true,
+   "max_duration": 30.0,
+   "train_sources": {
+    "VIVOS": null,
+    "FLEURS": null,
+    "VietMed": null,
+    "ViMedCSS": null
+   },
+   "eval_sources": [
+    "VIVOS",
+    "FLEURS",
+    "VietMed",
+    "ViMedCSS_vsplit"
+   ],
+   "dev_max_per_source": 150
+  },
+  "train": null,
+  "eval": {
+   "batch_size": 16,
+   "num_beams": 5,
+   "max_new_tokens": 225,
+   "checkpoint": "local/runs/V5_phowhisper_medium_lora_vsplit_specaug/local_v5/final",
+   "silence_peak": 0.001,
+   "max_tokens_per_second": 12,
+   "max_tokens_offset": 20
+  },
+  "exp_id": "V5B_phowhisper_medium_lora_vsplit_specaug_beam5"
+ },
+ "adapter": {
+  "path": "local\\runs\\V5_phowhisper_medium_lora_vsplit_specaug\\local_v5\\final",
+  "adapter_model.safetensors": "f599a95a2baacd6f856b16790cc09008f81e900b3820c633eb2f2ace6ba9008b",
+  "adapter_config.json": "f0ea88d18fc6f198f98f73f57c3b8b920fcc376a9586a0101e3ebfcfce9f38b1"
+ },
+ "decode": {
+  "num_beams": 5,
+  "max_new_tokens": 225,
+  "silence_peak": 0.001,
+  "max_tokens_per_second": 12,
+  "max_tokens_offset": 20
+ },
+ "dev_evidence": {
+  "B0V": {
+   "wer": 0.24828722854188212,
+   "by_source": {
+    "FLEURS": 0.10885805763073639,
+    "VIVOS": 0.0042037586547972305,
+    "ViMedCSS_vsplit": 0.2905050006173602,
+    "VietMed": 0.25865370665892934
+   },
+   "cs_term_recall": 0.09051186017478152,
+   "rtf_decode_only": 0.10103434699039443,
+   "checkpoint": "vinai/PhoWhisper-small"
+  },
+  "V4": {
+   "wer": 0.1796471044467425,
+   "by_source": {
+    "FLEURS": 0.08489376152129621,
+    "VIVOS": 0.02274975272007913,
+    "ViMedCSS_vsplit": 0.16572416347697247,
+    "VietMed": 0.21119976788045844
+   },
+   "cs_term_recall": 0.6248439450686641,
+   "rtf_decode_only": 0.08827057715559887,
+   "checkpoint": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\local\\runs\\V4_phowhisper_small_lora_vsplit_specaug\\local_v4\\final"
+  },
+  "V4B": {
+   "wer": 0.17256980351602896,
+   "by_source": {
+    "FLEURS": 0.08431163287086446,
+    "VIVOS": 0.02274975272007913,
+    "ViMedCSS_vsplit": 0.15399432028645513,
+    "VietMed": 0.2054693166980995
+   },
+   "cs_term_recall": 0.6641697877652933,
+   "rtf_decode_only": 0.20787514240432178,
+   "checkpoint": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\local\\runs\\V4_phowhisper_small_lora_vsplit_specaug\\local_v4\\final"
+  },
+  "V5": {
+   "wer": 0.15670243019648397,
+   "by_source": {
+    "FLEURS": 0.06461628019792374,
+    "VIVOS": 0.00791295746785361,
+    "ViMedCSS_vsplit": 0.13406593406593406,
+    "VietMed": 0.19249963731321632
+   },
+   "cs_term_recall": 0.6972534332084894,
+   "rtf_decode_only": 0.1771805458312577,
+   "checkpoint": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\local\\runs\\V5_phowhisper_medium_lora_vsplit_specaug\\local_v5\\final"
+  },
+  "V5B": {
+   "wer": 0.1533495992761117,
+   "by_source": {
+    "FLEURS": 0.06257882992141263,
+    "VIVOS": 0.007665677546983185,
+    "ViMedCSS_vsplit": 0.12720088899864182,
+    "VietMed": 0.19083127810822573
+   },
+   "cs_term_recall": 0.7253433208489388,
+   "rtf_decode_only": 0.3214907863455801,
+   "checkpoint": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\local\\runs\\V5_phowhisper_medium_lora_vsplit_specaug\\local_v5\\final"
+  }
+ },
+ "test_protocol": {
+  "splits": [
+   "test",
+   "hard"
+  ],
+  "run_ids": {
+   "V5": "test_local_v5",
+   "V5B": "test_beam5"
+  },
+  "rule": "decode each candidate once; no model or decode change after reading TEST"
+ },
+ "test_data": {
+  "FLEURS/test": {
+   "rows": 857,
+   "hours": 3.004,
+   "groups": 347,
+   "sha256": "52337156c3a88ed43cc5d85bd76d82f83bd88cb971d2d3bb0e686d8dd28f7f95"
+  },
+  "VietMed/test": {
+   "rows": 3437,
+   "hours": 6.022,
+   "groups": 14,
+   "sha256": "640c26d24b7890a95862971f97892f0244464d91827199e6200dcfd6857e102f"
+  },
+  "ViMedCSS_vsplit/hard": {
+   "rows": 71,
+   "hours": 0.13,
+   "groups": 40,
+   "sha256": "9925e5d48dffcdc3a9b6d6e5bed62d108def96eb3f393ca652b5ab7889db31f0"
+  },
+  "ViMedCSS_vsplit/test": {
+   "rows": 1539,
+   "hours": 2.911,
+   "groups": 234,
+   "sha256": "f9a519ceffdf0b9308d990e845f4a6392c741728329191f2479fc24878959796"
+  },
+  "VIVOS/test": {
+   "rows": 760,
+   "hours": 0.746,
+   "groups": 19,
+   "sha256": "bbbb20d1ba3e19888a5a886ce6f00dc309cf4817876b9e0c3f39dcddc7dd7dda"
+  }
+ }
+}

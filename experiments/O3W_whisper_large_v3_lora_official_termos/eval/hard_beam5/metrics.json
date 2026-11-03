@@ -1,0 +1,45 @@
+{
+  "overall": {
+    "n_utts": 658,
+    "n_empty_refs_skipped": 0,
+    "wer": 0.16421702050444564,
+    "cer": 0.11803539471067807,
+    "ref_words": 16533,
+    "substitutions": 1506,
+    "deletions": 723,
+    "insertions": 486,
+    "cs_terms_total": 758,
+    "cs_term_recall": 0.5026385224274407,
+    "audio_hours": 1.295,
+    "n_silent": 0,
+    "n_truncated": 1
+  },
+  "by_source": {
+    "ViMedCSS": {
+      "n_utts": 658,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.16421702050444564,
+      "cer": 0.11803539471067807,
+      "ref_words": 16533,
+      "substitutions": 1506,
+      "deletions": 723,
+      "insertions": 486,
+      "cs_terms_total": 758,
+      "cs_term_recall": 0.5026385224274407,
+      "audio_hours": 1.295,
+      "n_silent": 0,
+      "n_truncated": 1
+    }
+  },
+  "rtf_decode_only": 0.04672721869262077,
+  "checkpoint": "/content/drive/MyDrive/DPL/ASR/experiments/O3W_whisper_large_v3_lora_official_termos/final",
+  "decode": {
+    "num_beams": 5,
+    "batch_size": 16,
+    "dtype": "torch.float16",
+    "device": "cuda",
+    "silence_peak": 0.001,
+    "max_tokens_per_second": 12,
+    "max_tokens_offset": 20
+  }
+}

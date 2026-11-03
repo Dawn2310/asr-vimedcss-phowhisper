@@ -1,0 +1,14 @@
+{
+  "total_errors": 18981,
+  "clips": 4978,
+  "perfect_clips": 579,
+  "source_error_share_pct": {
+    "FLEURS": 3.3981349770823455,
+    "VIVOS": 0.1633212159527949,
+    "ViMedCSS_vsplit": 27.137663979769243,
+    "VietMed": 69.30087982719562
+  },
+  "clips_wer_gt_50": 126,
+  "errors_in_clips_wer_gt_50_pct": 7.712976134028765,
+  "top_edge_errors_vietmed_pct": 68.31382089098373
+}

@@ -1,0 +1,84 @@
+{
+  "overall": {
+    "n_utts": 6585,
+    "n_empty_refs_skipped": 0,
+    "wer": 0.17688460575380846,
+    "cer": 0.13588588471113627,
+    "ref_words": 147763,
+    "substitutions": 11510,
+    "deletions": 8166,
+    "insertions": 6461,
+    "cs_terms_total": 1611,
+    "cs_term_recall": 0.5940409683426443,
+    "audio_hours": 12.60430682460467,
+    "n_silent": 0,
+    "n_truncated": 10
+  },
+  "by_source": {
+    "FLEURS": {
+      "n_utts": 850,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.08830091197307136,
+      "cer": 0.04720198969621602,
+      "ref_words": 25549,
+      "substitutions": 1802,
+      "deletions": 180,
+      "insertions": 274,
+      "audio_hours": 2.9386000025272367,
+      "n_silent": 0,
+      "n_truncated": 0
+    },
+    "VIVOS": {
+      "n_utts": 760,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.06785806785806786,
+      "cer": 0.029935003509200208,
+      "ref_words": 7722,
+      "substitutions": 481,
+      "deletions": 23,
+      "insertions": 20,
+      "audio_hours": 0.745984599855211,
+      "n_silent": 0,
+      "n_truncated": 0
+    },
+    "ViMedCSS_vsplit": {
+      "n_utts": 1539,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.18145812705195685,
+      "cer": 0.13018157301281008,
+      "ref_words": 38378,
+      "substitutions": 4077,
+      "deletions": 1871,
+      "insertions": 1016,
+      "cs_terms_total": 1611,
+      "cs_term_recall": 0.5940409683426443,
+      "audio_hours": 2.911111111111111,
+      "n_silent": 0,
+      "n_truncated": 8
+    },
+    "VietMed": {
+      "n_utts": 3436,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.21537430696061172,
+      "cer": 0.1807691112009202,
+      "ref_words": 76114,
+      "substitutions": 5150,
+      "deletions": 6092,
+      "insertions": 5151,
+      "audio_hours": 6.008611111111111,
+      "n_silent": 0,
+      "n_truncated": 2
+    }
+  },
+  "rtf_decode_only": 0.18808983149713998,
+  "checkpoint": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\local\\runs\\V3_phowhisper_small_lora_vsplit\\local_v3\\final",
+  "decode": {
+    "num_beams": 5,
+    "batch_size": 1,
+    "dtype": "torch.float16",
+    "device": "cuda",
+    "silence_peak": 0.001,
+    "max_tokens_per_second": 12,
+    "max_tokens_offset": 20
+  }
+}

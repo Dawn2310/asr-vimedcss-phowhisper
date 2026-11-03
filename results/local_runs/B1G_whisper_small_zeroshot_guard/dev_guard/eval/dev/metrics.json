@@ -1,0 +1,84 @@
+{
+  "overall": {
+    "n_utts": 5168,
+    "n_empty_refs_skipped": 0,
+    "wer": 0.46587578833845217,
+    "cer": 0.3474241710395919,
+    "ref_words": 127959,
+    "substitutions": 26697,
+    "deletions": 19726,
+    "insertions": 13190,
+    "cs_terms_total": 1813,
+    "cs_term_recall": 0.16050744622173194,
+    "audio_hours": 9.83113250301944,
+    "n_silent": 5,
+    "n_truncated": 237
+  },
+  "by_source": {
+    "FLEURS": {
+      "n_utts": 359,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.2526438342873775,
+      "cer": 0.12593162581070683,
+      "ref_words": 10307,
+      "substitutions": 2010,
+      "deletions": 137,
+      "insertions": 457,
+      "audio_hours": 1.1767000030146704,
+      "n_silent": 0,
+      "n_truncated": 3
+    },
+    "VIVOS": {
+      "n_utts": 184,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.20450049455984173,
+      "cer": 0.08513451368130605,
+      "ref_words": 4044,
+      "substitutions": 800,
+      "deletions": 17,
+      "insertions": 10,
+      "audio_hours": 0.3292013888888889,
+      "n_silent": 0,
+      "n_truncated": 0
+    },
+    "ViMedCSS": {
+      "n_utts": 1713,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.4054120596266619,
+      "cer": 0.2751710164697386,
+      "ref_words": 44678,
+      "substitutions": 9875,
+      "deletions": 5188,
+      "insertions": 3050,
+      "cs_terms_total": 1813,
+      "cs_term_recall": 0.16050744622173194,
+      "audio_hours": 3.366897777782546,
+      "n_silent": 5,
+      "n_truncated": 43
+    },
+    "VietMed": {
+      "n_utts": 2912,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.5522849267372697,
+      "cer": 0.4469934864586904,
+      "ref_words": 68930,
+      "substitutions": 14012,
+      "deletions": 14384,
+      "insertions": 9673,
+      "audio_hours": 4.958333333333333,
+      "n_silent": 0,
+      "n_truncated": 191
+    }
+  },
+  "rtf_decode_only": 0.08752939909824868,
+  "checkpoint": "openai/whisper-small",
+  "decode": {
+    "num_beams": 1,
+    "batch_size": 1,
+    "dtype": "torch.float16",
+    "device": "cuda",
+    "silence_peak": 0.001,
+    "max_tokens_per_second": 12,
+    "max_tokens_offset": 20
+  }
+}

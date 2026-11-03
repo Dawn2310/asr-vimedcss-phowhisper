@@ -1,0 +1,45 @@
+{
+  "overall": {
+    "n_utts": 71,
+    "n_empty_refs_skipped": 0,
+    "wer": 0.21645569620253163,
+    "cer": 0.13802119168845467,
+    "ref_words": 1580,
+    "substitutions": 203,
+    "deletions": 60,
+    "insertions": 79,
+    "cs_terms_total": 84,
+    "cs_term_recall": 0.42857142857142855,
+    "audio_hours": 0.13,
+    "n_silent": 0,
+    "n_truncated": 0
+  },
+  "by_source": {
+    "ViMedCSS_vsplit": {
+      "n_utts": 71,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.21645569620253163,
+      "cer": 0.13802119168845467,
+      "ref_words": 1580,
+      "substitutions": 203,
+      "deletions": 60,
+      "insertions": 79,
+      "cs_terms_total": 84,
+      "cs_term_recall": 0.42857142857142855,
+      "audio_hours": 0.13,
+      "n_silent": 0,
+      "n_truncated": 0
+    }
+  },
+  "rtf_decode_only": 0.20926627628211705,
+  "checkpoint": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\local\\runs\\V3_phowhisper_small_lora_vsplit\\local_v3\\final",
+  "decode": {
+    "num_beams": 5,
+    "batch_size": 1,
+    "dtype": "torch.float16",
+    "device": "cuda",
+    "silence_peak": 0.001,
+    "max_tokens_per_second": 12,
+    "max_tokens_offset": 20
+  }
+}

@@ -1,0 +1,7 @@
+experiment,run,split_or_subset,n,WER (%),CER (%),checkpoint
+B0_phowhisper_small_zeroshot,dev_local_v1,dev,5168,24.72667026156816,19.251340759634424,vinai/PhoWhisper-small
+B0_phowhisper_small_zeroshot,smoke_eval,dev_sub2,8,15.59633027522936,8.735868448098664,vinai/PhoWhisper-small
+B1_whisper_small_zeroshot,dev_local_v1,dev,5168,58.75163138192703,46.35463205151116,openai/whisper-small
+B1_whisper_small_zeroshot,smoke_eval,dev_sub2,8,30.275229357798167,18.602261048304214,openai/whisper-small
+V1_phowhisper_small_lora,dev_local_v1,dev,5168,18.478575168608696,14.364675789789109,D:\1.FPT_FALL26\DPL - Deep Learning\ASR\local\runs\V1_phowhisper_small_lora\local_v1\final
+V1_phowhisper_small_lora,smoke_local_v1,dev_sub2,8,10.091743119266056,5.0359712230215825,D:\1.FPT_FALL26\DPL - Deep Learning\ASR\local\runs\V1_phowhisper_small_lora\local_v1\final

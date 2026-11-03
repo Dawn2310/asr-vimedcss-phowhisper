@@ -1,0 +1,52 @@
+{
+  "config": {
+    "seed": 13,
+    "model": {
+      "name": "vinai/PhoWhisper-small",
+      "language": "vi",
+      "task": "transcribe",
+      "lora": null
+    },
+    "data": {
+      "dir": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\ASR\\data",
+      "normalize_text": true,
+      "max_duration": 30.0,
+      "train_sources": {
+        "VIVOS": null,
+        "FLEURS": null,
+        "VietMed": null,
+        "ViMedCSS": null
+      },
+      "eval_sources": [
+        "VIVOS",
+        "FLEURS",
+        "VietMed",
+        "ViMedCSS"
+      ],
+      "dev_max_per_source": 150
+    },
+    "train": null,
+    "eval": {
+      "batch_size": 1,
+      "num_beams": 1,
+      "max_new_tokens": 225
+    },
+    "exp_id": "B0_phowhisper_small_zeroshot"
+  },
+  "profile": {
+    "total_gpu_budget_gb": 4.5,
+    "gpu_duty_cycle": 0.7,
+    "host_ram_budget_gb": 0,
+    "save_steps": 100,
+    "checkpoint_interval_seconds": 600,
+    "save_total_limit": 2,
+    "batch_size": 1,
+    "grad_accum": 32,
+    "num_workers": 0
+  },
+  "smoke": false,
+  "source_script": "eval",
+  "checkpoint": null,
+  "split": "dev",
+  "max_per_source": null
+}

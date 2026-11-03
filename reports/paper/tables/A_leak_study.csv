@@ -1,0 +1,2 @@
+backbone,seed,seen_clips,seen_videos,seen_wer_clean,seen_wer_leak,seen_gap,seen_gap_lo,seen_gap_hi,unseen_clips,unseen_videos,unseen_wer_clean,unseen_wer_leak,unseen_gap,unseen_gap_lo,unseen_gap_hi,did,did_lo,did_hi,seen_rel_inflation_pct
+small,13,809,192,17.995,17.501,0.494,-0.334,1.283,1409,179,14.934,14.741,0.193,-0.173,0.555,0.301,-0.631,1.143,2.745
