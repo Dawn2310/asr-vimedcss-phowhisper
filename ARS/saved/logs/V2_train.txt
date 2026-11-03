@@ -1,0 +1,121 @@
+===== 20261023_234313_train_v2.log
+[INIT] mode=train experiment=V2_phowhisper_small_lora_cont; importing PyTorch/ASR libraries...
+{
+  "python": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\.venv-asr\\Scripts\\python.exe",
+  "cuda": true,
+  "versions": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.46.3",
+    "peft": "0.13.2",
+    "accelerate": "1.1.1",
+    "datasets": "3.1.0"
+  },
+  …
+}
+[MODEL] Loading processor and weights; first use may download model files...
+trainable params: 12,976,128 || all params: 254,711,040 || trainable%: 5.0945
+[MODEL] Weights loaded.
+[DATA] Loading TRAIN parquet and applying duration filters...
+Exclude ViMedCSS/train: 10 empty-audio rows (duration <= 0): ['vimedcss:Med_CS-3625-10', 'vimedcss:Med_CS-3625-17', 'vimedcss:Med_CS-3625-19', 'vimedcss:Med_CS-3625-20', 'vimedcss:Med_CS-3625-5', 'vimedcss:Med_CS-3625-9', 'vimedcss:Med_CS-4072_1-1', 'vimedcss:Med_CS-4072_1-15', 'vimedcss:Med_CS-4072_1-17', 'vimedcss:Med_CS-4072_1-8']
+[DATA] TRAIN: 29061 clips. Loading DEV...
+Exclude ViMedCSS/dev: 1 empty-audio rows (duration <= 0): ['vimedcss:Med_CS-4072_1-11']
+[DATA] DEV: 600 clips.
+train=29061 dev=600 resume_from_checkpoint=None
+[TRAIN] Start/resume step 0/1816 | batch=1 | accumulation=32
+[TRAIN] 1/1816 (0.1%) | epoch=0.001 | ETA~781.1 min | RAM=1.56 GB | VRAM(total)=2.81 GB
+{'loss': 0.0666, 'grad_norm': 12.037291526794434, 'learning_rate': 1.098901098901099e-06, 'epoch': 0.0}
+===== 20261023_235920_599400.log
+[INIT] mode=train experiment=V2_phowhisper_small_lora_cont; importing PyTorch/ASR libraries...
+{
+  "python": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\.venv-asr\\Scripts\\python.exe",
+  "cuda": true,
+  "versions": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.46.3",
+    "peft": "0.13.2",
+    "accelerate": "1.1.1",
+    "datasets": "3.1.0"
+  },
+  …
+}
+[MODEL] Loading processor and weights; first use may download model files...
+trainable params: 12,976,128 || all params: 254,711,040 || trainable%: 5.0945
+[MODEL] Weights loaded.
+[DATA] Loading TRAIN parquet and applying duration filters...
+Exclude ViMedCSS/train: 10 empty-audio rows (duration <= 0): ['vimedcss:Med_CS-3625-10', 'vimedcss:Med_CS-3625-17', 'vimedcss:Med_CS-3625-19', 'vimedcss:Med_CS-3625-20', 'vimedcss:Med_CS-3625-5', 'vimedcss:Med_CS-3625-9', 'vimedcss:Med_CS-4072_1-1', 'vimedcss:Med_CS-4072_1-15', 'vimedcss:Med_CS-4072_1-17', 'vimedcss:Med_CS-4072_1-8']
+[DATA] TRAIN: 29061 clips. Loading DEV...
+Exclude ViMedCSS/dev: 1 empty-audio rows (duration <= 0): ['vimedcss:Med_CS-4072_1-11']
+[DATA] DEV: 600 clips.
+train=29061 dev=600 resume_from_checkpoint=D:\1.FPT_FALL26\DPL - Deep Learning\ASR\local\runs\V2_phowhisper_small_lora_cont\local_v2\checkpoints\checkpoint-24
+[TRAIN] Start/resume step 24/1816 | batch=1 | accumulation=32
+{'loss': 0.106, 'grad_norm': 19.309730529785156, 'learning_rate': 5.384615384615385e-05, 'epoch': 0.06}
+{'loss': 0.0652, 'grad_norm': 16.661914825439453, 'learning_rate': 9.953623188405798e-05, 'epoch': 0.11}
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+{'eval_loss': 0.3035396933555603, 'eval_wer': 0.13900277741039546, 'eval_cer': 0.09911569078096223, 'eval_runtime': 371.1724, 'eval_samples_per_second': 1.616, 'eval_steps_per_second': 0.202, 'epoch': 0.11}
+{'loss': 0.0898, 'grad_norm': 18.566205978393555, 'learning_rate': 9.669565217391304e-05, 'epoch': 0.17}
+[TRAIN] 181/1816 (10.0%) | epoch=0.199 | ETA~582.1 min | RAM=2.38 GB | VRAM(total)=3.05 GB
+{'loss': 0.0957, 'grad_norm': 20.503921508789062, 'learning_rate': 9.385507246376813e-05, 'epoch': 0.22}
+{'eval_loss': 0.3054530620574951, 'eval_wer': 0.13146409205131596, 'eval_cer': 0.09247956652105752, 'eval_runtime': 375.594, 'eval_samples_per_second': 1.597, 'eval_steps_per_second': 0.2, 'epoch': 0.22}
+{'loss': 0.0628, 'grad_norm': 12.427438735961914, 'learning_rate': 9.095652173913044e-05, 'epoch': 0.28}
+{'loss': 0.0723, 'grad_norm': 18.589216232299805, 'learning_rate': 8.805797101449276e-05, 'epoch': 0.33}
+{'eval_loss': 0.3049686551094055, 'eval_wer': 0.14568178812326413, 'eval_cer': 0.10276860321760704, 'eval_runtime': 383.4466, 'eval_samples_per_second': 1.565, 'eval_steps_per_second': 0.196, 'epoch': 0.33}
+{'loss': 0.0868, 'grad_norm': 17.531024932861328, 'learning_rate': 8.515942028985507e-05, 'epoch': 0.39}
+[TRAIN] 363/1816 (20.0%) | epoch=0.400 | ETA~549.1 min | RAM=3.01 GB | VRAM(total)=3.00 GB
+{'loss': 0.0986, 'grad_norm': 16.715473175048828, 'learning_rate': 8.226086956521739e-05, 'epoch': 0.44}
+{'eval_loss': 0.3070884048938751, 'eval_wer': 0.1361592381960058, 'eval_cer': 0.09579762865100988, 'eval_runtime': 376.5245, 'eval_samples_per_second': 1.594, 'eval_steps_per_second': 0.199, 'epoch': 0.44}
+{'loss': 0.092, 'grad_norm': 26.530014038085938, 'learning_rate': 7.936231884057971e-05, 'epoch': 0.5}
+{'loss': 0.1023, 'grad_norm': 18.320524215698242, 'learning_rate': 7.646376811594203e-05, 'epoch': 0.55}
+{'eval_loss': 0.30230218172073364, 'eval_wer': 0.13629149583388442, 'eval_cer': 0.09602593567830017, 'eval_runtime': 375.2619, 'eval_samples_per_second': 1.599, 'eval_steps_per_second': 0.2, 'epoch': 0.55}
+[TRAIN] 544/1816 (30.0%) | epoch=0.599 | ETA~488.3 min | RAM=3.62 GB | VRAM(total)=2.90 GB
+{'loss': 0.0847, 'grad_norm': 15.6487398147583, 'learning_rate': 7.356521739130436e-05, 'epoch': 0.61}
+{'loss': 0.0858, 'grad_norm': 21.192195892333984, 'learning_rate': 7.072463768115942e-05, 'epoch': 0.66}
+{'eval_loss': 0.30336105823516846, 'eval_wer': 0.135299563549795, 'eval_cer': 0.09582806958798191, 'eval_runtime': 374.9383, 'eval_samples_per_second': 1.6, 'eval_steps_per_second': 0.2, 'epoch': 0.66}
+{'loss': 0.0764, 'grad_norm': 17.90643882751465, 'learning_rate': 6.782608695652173e-05, 'epoch': 0.72}
+{'loss': 0.0836, 'grad_norm': 16.20146942138672, 'learning_rate': 6.492753623188406e-05, 'epoch': 0.77}
+{'eval_loss': 0.30166101455688477, 'eval_wer': 0.13582859410130935, 'eval_cer': 0.09599549474132814, 'eval_runtime': 375.7805, 'eval_samples_per_second': 1.597, 'eval_steps_per_second': 0.2, 'epoch': 0.77}
+[TRAIN] 726/1816 (40.0%) | epoch=0.799 | ETA~421.6 min | RAM=4.23 GB | VRAM(total)=2.97 GB
+{'loss': 0.1003, 'grad_norm': 19.097400665283203, 'learning_rate': 6.202898550724639e-05, 'epoch': 0.83}
+{'loss': 0.0808, 'grad_norm': 13.992898941040039, 'learning_rate': 5.9130434782608704e-05, 'epoch': 0.88}
+{'eval_loss': 0.29931390285491943, 'eval_wer': 0.13543182118767358, 'eval_cer': 0.09663475441774098, 'eval_runtime': 375.1344, 'eval_samples_per_second': 1.599, 'eval_steps_per_second': 0.2, 'epoch': 0.88}
+{'loss': 0.0997, 'grad_norm': 20.6021728515625, 'learning_rate': 5.623188405797102e-05, 'epoch': 0.94}
+{'loss': 0.0841, 'grad_norm': 20.431903839111328, 'learning_rate': 5.333333333333333e-05, 'epoch': 0.99}
+{'eval_loss': 0.29786911606788635, 'eval_wer': 0.1384737468588811, 'eval_cer': 0.1009117060623126, 'eval_runtime': 382.2863, 'eval_samples_per_second': 1.57, 'eval_steps_per_second': 0.196, 'epoch': 0.99}
+[TRAIN] 908/1816 (50.0%) | epoch=1.000 | ETA~353.0 min | RAM=4.82 GB | VRAM(total)=2.90 GB
+{'loss': 0.0538, 'grad_norm': 16.571701049804688, 'learning_rate': 5.0434782608695655e-05, 'epoch': 1.05}
+{'loss': 0.046, 'grad_norm': 16.534183502197266, 'learning_rate': 4.7536231884057976e-05, 'epoch': 1.1}
+{'eval_loss': 0.314599871635437, 'eval_wer': 0.13926729268615262, 'eval_cer': 0.10072906044048036, 'eval_runtime': 379.939, 'eval_samples_per_second': 1.579, 'eval_steps_per_second': 0.197, 'epoch': 1.1}
+{'loss': 0.0349, 'grad_norm': 12.750317573547363, 'learning_rate': 4.463768115942029e-05, 'epoch': 1.16}
+[TRAIN] 1089/1816 (60.0%) | epoch=1.199 | ETA~277.3 min | RAM=4.84 GB | VRAM(total)=2.89 GB
+{'loss': 0.0649, 'grad_norm': 15.497390747070312, 'learning_rate': 4.1739130434782605e-05, 'epoch': 1.21}
+{'eval_loss': 0.31372806429862976, 'eval_wer': 0.13391085835206984, 'eval_cer': 0.09712180940929362, 'eval_runtime': 378.2737, 'eval_samples_per_second': 1.586, 'eval_steps_per_second': 0.198, 'epoch': 1.21}
+{'loss': 0.0445, 'grad_norm': 15.41236686706543, 'learning_rate': 3.884057971014493e-05, 'epoch': 1.27}
+{'loss': 0.037, 'grad_norm': 12.890681266784668, 'learning_rate': 3.594202898550725e-05, 'epoch': 1.32}
+{'eval_loss': 0.31491339206695557, 'eval_wer': 0.13622536701494511, 'eval_cer': 0.09712180940929362, 'eval_runtime': 399.1922, 'eval_samples_per_second': 1.503, 'eval_steps_per_second': 0.188, 'epoch': 1.32}
+{'loss': 0.057, 'grad_norm': 23.007349014282227, 'learning_rate': 3.304347826086956e-05, 'epoch': 1.38}
+[TRAIN] 1271/1816 (70.0%) | epoch=1.400 | ETA~208.9 min | RAM=4.85 GB | VRAM(total)=2.90 GB
+{'loss': 0.0476, 'grad_norm': 20.975664138793945, 'learning_rate': 3.0144927536231887e-05, 'epoch': 1.43}
+{'eval_loss': 0.3169282078742981, 'eval_wer': 0.1427059912709959, 'eval_cer': 0.10416888631832087, 'eval_runtime': 406.4058, 'eval_samples_per_second': 1.476, 'eval_steps_per_second': 0.185, 'epoch': 1.43}
+{'loss': 0.0488, 'grad_norm': 12.711827278137207, 'learning_rate': 2.7246376811594205e-05, 'epoch': 1.49}
+{'loss': 0.0456, 'grad_norm': 13.17696475982666, 'learning_rate': 2.4347826086956523e-05, 'epoch': 1.54}
+{'eval_loss': 0.31701430678367615, 'eval_wer': 0.14244147599523874, 'eval_cer': 0.10232720963151246, 'eval_runtime': 409.436, 'eval_samples_per_second': 1.465, 'eval_steps_per_second': 0.183, 'epoch': 1.54}
+{'loss': 0.0524, 'grad_norm': 13.851949691772461, 'learning_rate': 2.144927536231884e-05, 'epoch': 1.6}
+[TRAIN] 1452/1816 (80.0%) | epoch=1.599 | ETA~140.9 min | RAM=4.87 GB | VRAM(total)=2.91 GB
+{'loss': 0.0551, 'grad_norm': 15.667950630187988, 'learning_rate': 1.855072463768116e-05, 'epoch': 1.65}
+{'eval_loss': 0.31612029671669006, 'eval_wer': 0.13549795000661288, 'eval_cer': 0.09675651816562914, 'eval_runtime': 382.261, 'eval_samples_per_second': 1.57, 'eval_steps_per_second': 0.196, 'epoch': 1.65}
+{'loss': 0.0471, 'grad_norm': 13.730998039245605, 'learning_rate': 1.565217391304348e-05, 'epoch': 1.71}
+{'loss': 0.0571, 'grad_norm': 12.830501556396484, 'learning_rate': 1.2753623188405797e-05, 'epoch': 1.76}
+{'eval_loss': 0.31699275970458984, 'eval_wer': 0.13589472292024865, 'eval_cer': 0.09707614800383556, 'eval_runtime': 382.6976, 'eval_samples_per_second': 1.568, 'eval_steps_per_second': 0.196, 'epoch': 1.76}
+[TRAIN] 1634/1816 (90.0%) | epoch=1.799 | ETA~70.5 min | RAM=4.88 GB | VRAM(total)=2.90 GB
+{'loss': 0.0453, 'grad_norm': 16.378154754638672, 'learning_rate': 9.855072463768116e-06, 'epoch': 1.82}
+{'loss': 0.0388, 'grad_norm': 11.78907299041748, 'learning_rate': 6.956521739130435e-06, 'epoch': 1.87}
+{'eval_loss': 0.3178377151489258, 'eval_wer': 0.14230921835736013, 'eval_cer': 0.10313389446127152, 'eval_runtime': 387.3212, 'eval_samples_per_second': 1.549, 'eval_steps_per_second': 0.194, 'epoch': 1.87}
+{'loss': 0.044, 'grad_norm': 13.805706977844238, 'learning_rate': 4.057971014492754e-06, 'epoch': 1.93}
+{'loss': 0.0434, 'grad_norm': 11.699870109558105, 'learning_rate': 1.1594202898550724e-06, 'epoch': 1.98}
+{'eval_loss': 0.31782180070877075, 'eval_wer': 0.13668826874752016, 'eval_cer': 0.09791327377056666, 'eval_runtime': 383.3347, 'eval_samples_per_second': 1.565, 'eval_steps_per_second': 0.196, 'epoch': 1.98}
+[TRAIN] 1816/1816 (100.0%) | epoch=2.000 | ETA~0.0 min | RAM=4.90 GB | VRAM(total)=2.88 GB
+[CHECKPOINT] Saved: D:\1.FPT_FALL26\DPL - Deep Learning\ASR\local\runs\V2_phowhisper_small_lora_cont\local_v2\checkpoints/checkpoint-1816
+[METRICS] {"train_runtime": 41691.5848, "train_samples_per_second": 1.394, "train_steps_per_second": 0.044, "total_flos": 1.785613378387968e+19, "train_loss": 0.06737565877539668, "epoch": 1.9996558962182993}
+{'train_runtime': 41691.5848, 'train_samples_per_second': 1.394, 'train_steps_per_second': 0.044, 'train_loss': 0.06737565877539668, 'epoch': 2.0}
+Saved local best adapter: D:\1.FPT_FALL26\DPL - Deep Learning\ASR\local\runs\V2_phowhisper_small_lora_cont\local_v2\final
+Elapsed: 41704.8s | Output: D:\1.FPT_FALL26\DPL - Deep Learning\ASR\local\runs\V2_phowhisper_small_lora_cont\local_v2
+[rút gọn để trình bày: ẩn 20.783 dòng tiến độ/cảnh báo lặp; loss in mỗi 10 lần ghi. Log đầy đủ: notebook gốc trong notebooks/local và local/logs]

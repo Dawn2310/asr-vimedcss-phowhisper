@@ -1,0 +1,15 @@
+system,split,wer_red,cs_red
+Whisper-Small zero-shot,TEST,-37.79,2.08
+Whisper-Small zero-shot,HARD,-49.56,-1.12
+PhoWhisper-Small zero-shot,TEST,0.0,0.0
+PhoWhisper-Small zero-shot,HARD,0.0,0.0
+Whisper-Large-v3 zero-shot,TEST,5.07,25.36
+Whisper-Large-v3 zero-shot,HARD,14.96,24.1
+PhoWhisper-Large zero-shot,TEST,13.96,11.99
+PhoWhisper-Large zero-shot,HARD,19.23,13.09
+VietASR zero-shot,TEST,24.1,6.67
+VietASR zero-shot,HARD,25.59,8.03
+PhoWhisper-Small + LoRA,TEST,25.28,51.62
+PhoWhisper-Small + LoRA,HARD,19.45,8.03
+PhoWhisper-Small + AG (best),TEST,34.81,68.82
+PhoWhisper-Small + AG (best),HARD,27.1,13.21

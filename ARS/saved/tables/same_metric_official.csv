@@ -1,0 +1,9 @@
+split,system,description,n_clips,cs_words,term_coverage,wer,cer,cs_wer,cs_wer_no_ins,n_wer,term_recall,n_unseen,wer_unseen,paper_row,wer_red_vs_B0,cs_red_vs_B0
+TEST,B0,PhoWhisper-small zero-shot,1613,1683,0.9959,28.025,19.7588,95.1872,88.5918,25.3152,11.3341,100,31.7261,PhoWhisper-Small zero-shot,0.0,0.0
+TEST,B2,PhoWhisper-large zero-shot,1613,1683,0.9959,23.1375,16.5568,82.65,77.3024,20.7364,23.6718,100,27.0665,PhoWhisper-Large zero-shot,17.4396,13.171
+TEST,B3,Whisper-large-v3 zero-shot,1613,1683,0.9959,29.615,22.8526,65.8942,64.4682,28.1512,39.7285,100,39.4246,Whisper-Large-v3 zero-shot,-5.6734,30.774
+TEST,O3W,"Whisper-large-v3 + LoRA + SpecAugment + rare-term oversampling, beam 5",1613,1683,0.9959,11.3971,8.4809,23.0541,22.1628,10.9268,79.8701,100,15.9643,,59.3323,75.7803
+HARD,B0,PhoWhisper-small zero-shot,658,794,0.9974,36.037,25.1833,99.2443,91.5617,32.8483,8.3113,270,34.9971,PhoWhisper-Small zero-shot,0.0,0.0
+HARD,B2,PhoWhisper-large zero-shot,658,794,0.9974,27.1397,19.4724,81.9899,76.1965,24.3726,24.6702,270,27.8167,PhoWhisper-Large zero-shot,24.6895,17.3858
+HARD,B3,Whisper-large-v3 zero-shot,658,794,0.9974,33.1398,25.0401,71.5365,65.2393,31.2027,37.9947,270,35.9749,Whisper-Large-v3 zero-shot,8.0396,27.9188
+HARD,O3W,"Whisper-large-v3 + LoRA + SpecAugment + rare-term oversampling, beam 5",658,794,0.9974,16.4217,11.8035,56.0453,51.6373,14.4228,50.2639,270,18.7974,,54.431,43.5279

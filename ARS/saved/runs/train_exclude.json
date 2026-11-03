@@ -1,0 +1,23 @@
+{
+ "rule": "TRAIN only: peak < 0.001 or reference tokens/s > 16 (PhoWhisper tokenizer)",
+ "counts": {
+  "VIVOS": 1,
+  "ViMedCSS_vsplit": 13
+ },
+ "ids": {
+  "vivos:VIVOSSPK46_288": "32.0 tokens/s",
+  "vimedcss:Med_CS-1465_1-17": "16.3 tokens/s",
+  "vimedcss:Med_CS-1465_1-21": "18.0 tokens/s",
+  "vimedcss:Med_CS-1465_1-24": "18.2 tokens/s",
+  "vimedcss:Med_CS-1465_1-31": "16.7 tokens/s",
+  "vimedcss:Med_CS-1465_2-43": "16.4 tokens/s",
+  "vimedcss:Med_CS-1465_3-15": "16.4 tokens/s",
+  "vimedcss:Med_CS-1480-44": "18.0 tokens/s",
+  "vimedcss:Med_CS-2158_2-19": "16.3 tokens/s",
+  "vimedcss:Med_CS-3529-25": "19.3 tokens/s",
+  "vimedcss:Med_CS-5127_2-34": "16.8 tokens/s",
+  "vimedcss:Med_CS-1465_1-23": "16.3 tokens/s",
+  "vimedcss:Med_CS-1465_2-10": "16.2 tokens/s",
+  "vimedcss:Med_CS-1465_2-47": "17.7 tokens/s"
+ }
+}

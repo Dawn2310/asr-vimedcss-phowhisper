@@ -1,0 +1,29 @@
+[INIT] mode=eval experiment=V2_phowhisper_small_lora_cont; importing PyTorch/ASR libraries...
+{
+  "python": "D:\\1.FPT_FALL26\\DPL - Deep Learning\\.venv-asr\\Scripts\\python.exe",
+  "cuda": true,
+  "versions": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.46.3",
+    "peft": "0.13.2",
+    "accelerate": "1.1.1",
+    "datasets": "3.1.0"
+  },
+  …
+}
+[MODEL] Loading processor and weights; first use may download model files...
+[MODEL] Weights loaded.
+Exclude ViMedCSS/dev: 1 empty-audio rows (duration <= 0): ['vimedcss:Med_CS-4072_1-11']
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+5168/5168
+{
+  "overall_wer": 0.19075641416391187,
+  "by_source_wer": {
+    "FLEURS": 0.11079848646550888,
+    "VIVOS": 0.06157270029673591,
+    "ViMedCSS": 0.17285912529656655,
+    "VietMed": 0.22189177426374582
+  }
+}
+Elapsed: 4954.9s | Output: D:\1.FPT_FALL26\DPL - Deep Learning\ASR\local\runs\V2_phowhisper_small_lora_cont\dev_local_v2
+[rút gọn để trình bày: ẩn 5.184 dòng tiến độ/cảnh báo lặp; loss in mỗi 10 lần ghi. Log đầy đủ: notebook gốc trong notebooks/local và local/logs]

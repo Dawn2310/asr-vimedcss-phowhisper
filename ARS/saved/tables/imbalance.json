@@ -1,0 +1,27 @@
+{
+  "train_term_occurrences": 13295,
+  "train_term_distinct": 831,
+  "terms_seen_once": 173,
+  "terms_seen_lt5": 390,
+  "top10_share_pct": 22.452049642722827,
+  "top50_share_pct": 45.82925911996991,
+  "top1_term": "virus",
+  "top1_count": 793,
+  "top1_share_pct": 5.964648364046634,
+  "dev_term_occurrences": 1602,
+  "dev_term_distinct": 258,
+  "dev_distinct_unseen": 31,
+  "dev_occ_seen_share_pct": 94.00749063670412,
+  "dev_word_share_pct": {
+    "VIVOS": 3.264159624185776,
+    "FLEURS": 8.412233334140495,
+    "VietMed": 55.637616937469225,
+    "ViMedCSS_vsplit": 32.6859901042045
+  },
+  "train_word_share_pct": {
+    "VIVOS": 23.381967942871196,
+    "FLEURS": 13.497427149256472,
+    "VietMed": 10.568610909634259,
+    "ViMedCSS_vsplit": 52.551993998238075
+  }
+}

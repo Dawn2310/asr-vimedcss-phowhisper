@@ -1,6 +1,31 @@
-# ASR — môi trường huấn luyện (Google Colab)
+# ASR tiếng Việt y khoa có chèn tiếng Anh: Whisper + LoRA (Task 2)
 
 Thiết kế nghiên cứu: [ASR_Context_Streaming_Research_Blueprint_2026-10-13.md](ASR_Context_Streaming_Research_Blueprint_2026-10-13.md)
+
+## Kết quả
+
+Cùng bộ DEV chính thức (4 nguồn, 5.168 clip), WER (%), càng thấp càng tốt:
+
+| Phiên bản | Mô hình | DEV WER | Thư mục thí nghiệm |
+|---|---|---|---|
+| Baseline 1 | PhoWhisper-small zero-shot | 24,73 | `B0_phowhisper_small_zeroshot` |
+| Baseline 2 | Whisper-small zero-shot | 58,75 | `B1_whisper_small_zeroshot` |
+| V1 | PhoWhisper-small + LoRA | 18,48 | `V1_phowhisper_small_lora` |
+| V2 | V1 huấn luyện tiếp, lr 1e-4 (kém hơn V1) | 19,08 | `V2_phowhisper_small_lora_cont` |
+| **V-Final** | Whisper-large-v3 + LoRA + SpecAugment + oversampling thuật ngữ hiếm ×3, beam 5 | **15,07** | `O3W_whisper_large_v3_lora_official_termos` |
+
+V-Final trên tập khóa: ViMedCSS TEST 11,40, HARD 16,42, TEST cả 4 nguồn 14,94. Recall thuật ngữ trên DEV 81,30%.
+
+| Muốn xem | Ở đâu |
+|---|---|
+| Toàn bộ quá trình, mở ra xem ngay, không cần GPU | [ARS/](ARS/) — 7 notebook đã chạy sẵn output (dữ liệu, baseline, V1, V2, V-Final, thành phần và tính khả thi) |
+| Báo cáo | [reports/task2_20261030/TASK2_REPORT_VI.md](reports/task2_20261030/TASK2_REPORT_VI.md), bảng trong `tables/`, hình trong `figures/` |
+| Slide | `reports/task2_20261030/web_slides/` — bản web (`.html`) và PowerPoint (`.pptx`) |
+| Kết quả chạy trên Colab | `experiments/<ID>/eval/<split>/` (metrics + predictions) và `runs.jsonl` |
+| Kết quả chạy local | [results/local_runs/](results/local_runs/) — metrics, predictions, `trainer_state.json` (lịch sử loss/eval), xuất bằng `scripts/export_local_results.py` |
+| Notebook huấn luyện gốc | `notebooks/local/` (chạy local, còn nguyên log) và `colab_*.ipynb` (lệnh Colab; log từng bước nằm trên Google Drive, không có ở đây) |
+
+Không có trong repo: trọng số mô hình và adapter LoRA (adapter V-Final 230,83 MB), audio, dữ liệu parquet, log thô trong `local/logs`.
 
 ## Cấu trúc
 

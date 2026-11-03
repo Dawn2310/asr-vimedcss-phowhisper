@@ -1,0 +1,71 @@
+{
+  "occ_total": 1602,
+  "missed_total": 440,
+  "recall_seen_pct": 75.83001328021248,
+  "recall_unseen_pct": 20.833333333333336,
+  "occ_seen": 1506,
+  "occ_unseen": 96,
+  "missed_unseen_share_pct": 17.272727272727273,
+  "top_missed": [
+    {
+      "term": "phage",
+      "occurrences": 20,
+      "missed": 20
+    },
+    {
+      "term": "digeorge",
+      "occurrences": 27,
+      "missed": 17
+    },
+    {
+      "term": "tarlov",
+      "occurrences": 16,
+      "missed": 16
+    },
+    {
+      "term": "glasgow",
+      "occurrences": 36,
+      "missed": 11
+    },
+    {
+      "term": "turner",
+      "occurrences": 45,
+      "missed": 10
+    },
+    {
+      "term": "hormone",
+      "occurrences": 28,
+      "missed": 9
+    },
+    {
+      "term": "wegener",
+      "occurrences": 9,
+      "missed": 9
+    },
+    {
+      "term": "bernard",
+      "occurrences": 9,
+      "missed": 9
+    },
+    {
+      "term": "vaccin",
+      "occurrences": 20,
+      "missed": 7
+    },
+    {
+      "term": "insulin",
+      "occurrences": 11,
+      "missed": 7
+    },
+    {
+      "term": "anca",
+      "occurrences": 13,
+      "missed": 7
+    },
+    {
+      "term": "carnitin",
+      "occurrences": 7,
+      "missed": 7
+    }
+  ]
+}

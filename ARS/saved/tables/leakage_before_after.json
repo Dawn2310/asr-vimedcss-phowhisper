@@ -1,0 +1,27 @@
+{
+  "before": {
+    "train_clips": 11832,
+    "dev_clips": 1714,
+    "test_clips": 1614,
+    "hard_clips": 658,
+    "train_videos": 2264,
+    "dev_videos": 1022,
+    "dev_videos_shared_with_train": 909,
+    "dev_clips_sharing_video": 1589,
+    "test_videos_shared_with_train": 898
+  },
+  "after": {
+    "train_clips": 12688,
+    "dev_clips": 1523,
+    "test_clips": 1539,
+    "hard_clips": 71,
+    "train_videos": 2076,
+    "dev_videos": 259,
+    "dev_videos_shared_with_train": 0,
+    "dev_clips_sharing_video": 0,
+    "test_videos_shared_with_train": 0,
+    "dropped_duplicates": 4,
+    "dropped_silent": 64,
+    "train_exclude_ids": 14
+  }
+}

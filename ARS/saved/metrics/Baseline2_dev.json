@@ -1,0 +1,71 @@
+{
+  "overall": {
+    "n_utts": 5168,
+    "n_empty_refs_skipped": 0,
+    "wer": 0.5875163138192703,
+    "cer": 0.46354632051511163,
+    "ref_words": 127959,
+    "substitutions": 26790,
+    "deletions": 19625,
+    "insertions": 28763,
+    "cs_terms_total": 1813,
+    "cs_term_recall": 0.16050744622173194,
+    "audio_hours": 9.83113250301944
+  },
+  "by_source": {
+    "FLEURS": {
+      "n_utts": 359,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.256136606189968,
+      "cer": 0.12830603495657908,
+      "ref_words": 10307,
+      "substitutions": 2010,
+      "deletions": 137,
+      "insertions": 493,
+      "audio_hours": 1.1767000030146704
+    },
+    "VIVOS": {
+      "n_utts": 184,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.20450049455984173,
+      "cer": 0.08513451368130605,
+      "ref_words": 4044,
+      "substitutions": 800,
+      "deletions": 17,
+      "insertions": 10,
+      "audio_hours": 0.3292013888888889
+    },
+    "ViMedCSS": {
+      "n_utts": 1713,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.4645463091454407,
+      "cer": 0.32584404902806474,
+      "ref_words": 44678,
+      "substitutions": 9966,
+      "deletions": 5094,
+      "insertions": 5695,
+      "cs_terms_total": 1813,
+      "cs_term_recall": 0.16050744622173194,
+      "audio_hours": 3.366897777782546
+    },
+    "VietMed": {
+      "n_utts": 2912,
+      "n_empty_refs_skipped": 0,
+      "wer": 0.7392427099956478,
+      "cer": 0.632516283853274,
+      "ref_words": 68930,
+      "substitutions": 14014,
+      "deletions": 14377,
+      "insertions": 22565,
+      "audio_hours": 4.958333333333333
+    }
+  },
+  "rtf_decode_only": 0.18081426506091894,
+  "checkpoint": "openai/whisper-small",
+  "decode": {
+    "num_beams": 1,
+    "batch_size": 1,
+    "dtype": "torch.float16",
+    "device": "cuda"
+  }
+}
