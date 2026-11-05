@@ -1,8 +1,6 @@
 // ASR + MT Task 2 deck as an editable PowerPoint (content ported from the web deck).
 const path = require("path");
 const pptxgen = require("pptxgenjs");
-const SKILL = "C:/Users/nguye/.claude/skills/synced/2761ca51-8c5f-43e9-ba9a-e00a58c49de0_9e282bd4-fe32-4335-87a2-d082924611fb/pptx/scripts/apply_theme.js";
-const { applyTheme } = require(SKILL);
 const D = require("./data.json");
 
 const OUT = process.argv[2] || "deck_raw.pptx";
@@ -20,10 +18,7 @@ const K = {
   mt: "3F80F2", mtS: "2858B8", mtT: "86AEF7", mtInk: "1B4BAE",
   n: "7E9C9B", nS: "5C7877", nT: "A9C2C0", harm: "BC1F45", harmT: "FFB3C2",
 };
-const THEME = {
-  name: "ASR MT Y khoa", headFontFace: FONT, bodyFontFace: FONT,
-  colors: { dk1: K.ink, lt1: "FFFFFF", dk2: K.scrub, lt2: K.paper, accent1: K.asr, accent2: K.scrub3, accent3: K.mt, accent4: K.n, accent5: K.harm, accent6: K.asrS, hlink: K.mtInk, folHlink: K.nS },
-};
+pres.theme = { headFontFace: FONT, bodyFontFace: FONT, lang: "vi-VN" };
 
 /* ---------- layouts ---------- */
 const X0 = 0.667, CW = 12.0, X1 = X0 + CW;
@@ -512,7 +507,6 @@ Object.values(SEC).forEach(sec);
   s.addText("Trao đổi và thảo luận", { placeholder: "sub" });
 }
 
-pres.writeFile({ fileName: OUT }).then(async () => {
-  await applyTheme(OUT, THEME);
+pres.writeFile({ fileName: OUT }).then(() => {
   console.log("written", OUT);
 });

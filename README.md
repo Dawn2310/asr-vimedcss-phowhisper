@@ -1,110 +1,89 @@
-# ASR tiếng Việt y khoa có chèn tiếng Anh: Whisper + LoRA (Task 2)
+<p align="center"><img src="docs/assets/asr-banner.svg" alt="Vietnamese medical speech recognition with PhoWhisper and LoRA" width="100%" /></p>
 
-Thiết kế nghiên cứu: [ASR_Context_Streaming_Research_Blueprint_2026-10-13.md](ASR_Context_Streaming_Research_Blueprint_2026-10-13.md)
+<h1 align="center">Nhận dạng tiếng nói y khoa Việt–Anh</h1>
 
-## Kết quả
+<p align="center">PhoWhisper · Whisper · LoRA · ViMedCSS · Thực nghiệm Task 2</p>
 
-Cùng bộ DEV chính thức (4 nguồn, 5.168 clip), WER (%), càng thấp càng tốt:
+<p align="center">
+  <a href="#kết-quả-chính">Kết quả</a> ·
+  <a href="#xem-kết-quả-không-cần-gpu">Notebook</a> ·
+  <a href="#tái-lập-thí-nghiệm">Tái lập</a> ·
+  <a href="reports/task2_20261030/TASK2_REPORT_VI.md">Báo cáo đầy đủ</a>
+</p>
 
-| Phiên bản | Mô hình | DEV WER | Thư mục thí nghiệm |
-|---|---|---|---|
-| Baseline 1 | PhoWhisper-small zero-shot | 24,73 | `B0_phowhisper_small_zeroshot` |
-| Baseline 2 | Whisper-small zero-shot | 58,75 | `B1_whisper_small_zeroshot` |
-| V1 | PhoWhisper-small + LoRA | 18,48 | `V1_phowhisper_small_lora` |
-| V2 | V1 huấn luyện tiếp, lr 1e-4 (kém hơn V1) | 19,08 | `V2_phowhisper_small_lora_cont` |
-| **V-Final** | Whisper-large-v3 + LoRA + SpecAugment + oversampling thuật ngữ hiếm ×3, beam 5 | **15,07** | `O3W_whisper_large_v3_lora_official_termos` |
+> **Bài toán.** Chuyển tiếng nói y khoa tiếng Việt có xen thuật ngữ tiếng Anh thành bản ghi văn bản. Dự án so sánh hai baseline zero-shot, tinh chỉnh bằng LoRA và kiểm tra tác động của cách chia dữ liệu, SpecAugment, giải mã và kích thước mô hình.
 
-V-Final trên tập khóa: ViMedCSS TEST 11,40, HARD 16,42, TEST cả 4 nguồn 14,94. Recall thuật ngữ trên DEV 81,30%.
+## Kết quả chính
 
-| Muốn xem | Ở đâu |
-|---|---|
-| Toàn bộ quá trình, mở ra xem ngay, không cần GPU | [ARS/](ARS/) — 7 notebook đã chạy sẵn output (dữ liệu, baseline, V1, V2, V-Final, thành phần và tính khả thi) |
-| Báo cáo | [reports/task2_20261030/TASK2_REPORT_VI.md](reports/task2_20261030/TASK2_REPORT_VI.md), bảng trong `tables/`, hình trong `figures/` |
-| Slide | `reports/task2_20261030/web_slides/` — bản web (`.html`) và PowerPoint (`.pptx`) |
-| Kết quả chạy trên Colab | `experiments/<ID>/eval/<split>/` (metrics + predictions) và `runs.jsonl` |
-| Kết quả chạy local | [results/local_runs/](results/local_runs/) — metrics, predictions, `trainer_state.json` (lịch sử loss/eval), xuất bằng `scripts/export_local_results.py` |
-| Notebook huấn luyện gốc | `notebooks/local/` (chạy local, còn nguyên log) và `colab_*.ipynb` (lệnh Colab; log từng bước nằm trên Google Drive, không có ở đây) |
+**DEV chính thức — 4 nguồn, 5.168 clip.** WER càng thấp càng tốt. Các dòng dưới đây được chấm trên cùng tập DEV và cùng bộ chuẩn hóa của nhóm.
 
-Không có trong repo: trọng số mô hình và adapter LoRA (adapter V-Final 230,83 MB), audio, dữ liệu parquet, log thô trong `local/logs`.
+| Hệ thống | Thiết lập | WER ↓ | Recall thuật ngữ* ↑ |
+|:--|:--|--:|--:|
+| Baseline 1 | PhoWhisper-small, zero-shot | 24,73% | 12,96% |
+| Baseline 2 | Whisper-small, zero-shot | 58,75% | 16,05% |
+| V1 | PhoWhisper-small + LoRA | 18,48% | 71,26% |
+| V2 | Huấn luyện tiếp V1, learning rate thấp hơn | 19,08% | — |
+| **V-Final** | **Whisper-large-v3 + LoRA, SpecAugment, oversampling, beam 5** | **15,07%** | **81,30%** |
 
-## Cấu trúc
+Trên **ViMedCSS TEST/HARD chính thức**, V-Final đạt **11,40% / 16,42% WER** theo cách chấm của nhóm. [Kết quả gốc](experiments/O3W_whisper_large_v3_lora_official_termos/eval/) nằm trong repo; [báo cáo](reports/task2_20261030/TASK2_REPORT_VI.md) giải thích split, scorer và giới hạn khi đối chiếu với paper.
 
-```text
-ASR/
-├── colab.ipynb              # chạy trên Colab: mount Drive → baseline → train → eval
-├── requirements.txt
-├── asr/                     # thư viện dùng chung
-│   ├── config.py            # _base.yaml + config thí nghiệm, ghi runs.jsonl
-│   ├── data.py              # đọc parquet, trộn nguồn, tạo log-mel + labels
-│   ├── model.py             # Whisper / PhoWhisper, LoRA
-│   └── metrics.py           # chuẩn hóa text, WER/CER, CS-term recall
-├── scripts/
-│   ├── prepare_data.py      # raw → data/<SOURCE>/<split>.parquet (chạy 1 lần)
-│   ├── train.py             # train 1 thí nghiệm, tự resume
-│   └── evaluate.py          # giải mã + chấm 1 split
-├── experiments/
-│   ├── _base.yaml           # cấu hình mặc định chung
-│   └── <ID>/                # MỖI THÍ NGHIỆM MỘT THƯ MỤC
-│       ├── config.yaml      #   chỉ ghi phần khác _base.yaml
-│       ├── runs.jsonl       #   mỗi lần train/eval: config, phiên bản thư viện, GPU, hash dữ liệu
-│       ├── checkpoints/     #   checkpoint trong lúc train (giữ best + mới nhất)
-│       ├── final/           #   model tốt nhất theo DEV WER (LoRA: chỉ adapter)
-│       └── eval/<split>/    #   predictions.jsonl + metrics.json
-└── data/                    # sinh bởi prepare_data.py (không commit)
-```
+<sub>* Recall thuật ngữ dùng phép khớp chuỗi con trên nhãn `cs_terms`; không tương đương CS-WER hay đánh giá thủ công thuật ngữ.</sub>
 
-## Quy ước đặt tên thí nghiệm
+### Tiến trình trên DEV chia theo video
 
-| Tiền tố | Ý nghĩa | Ví dụ |
-|---|---|---|
-| `B*` | Baseline, không train (`train: null`) | `B0_phowhisper_small_zeroshot`, `B1_whisper_small_zeroshot` |
-| `V*` | Biến thể có train | `V1_phowhisper_small_lora` |
-| `*G` | Model đã có, giải mã với guard: bỏ clip im lặng, giới hạn token theo độ dài audio (ngưỡng lấy từ TRAIN) | `V1G_phowhisper_small_lora_guard` |
-| `*B` | Model đã có, giải mã beam search (`eval.num_beams: 5`) thay vì greedy | `V3B_phowhisper_small_lora_vsplit_beam5` |
-| `*V` / `V3`, `V4` | Dùng ViMedCSS chia lại theo video (`data/ViMedCSS_vsplit`) — không so ViMedCSS với V1/V2 | `B0V_...`, `V3_phowhisper_small_lora_vsplit` |
+Các bản V3–V6 dùng **một tập DEV khác** gồm 4.978 clip và ViMedCSS được chia lại theo video. Không lấy WER trong hình này trừ WER ở bảng DEV chính thức.
 
-Thêm thí nghiệm mới: copy một thư mục, đổi tên (`V2_...`), sửa `config.yaml`. Không sửa config của thí nghiệm đã có kết quả — tạo ID mới. Một mapping có `_replace: true` thay hẳn mapping của `_base.yaml` thay vì gộp (dùng cho danh sách nguồn mới).
+<p align="center"><img src="reports/task2_20261030/figures/fig6_ablation_dev_v3.png" alt="WER trên DEV chia theo video: Baseline 1 24,83%, V3 18,26%, V4 17,96%, V5 17,26%, V6 15,33%" width="760" /></p>
 
-**ViMedCSS chia lại theo video**: split chính thức có 81,7% clip TRAIN thuộc video cũng nằm trong DEV/TEST/HARD. `python scripts/build_v3_data.py` gộp các split, chia lại 80/10/10 theo video (seed 13), bỏ clip rỗng/im lặng, ghi `data/ViMedCSS_vsplit/` và `data/v3_train_exclude.json` (`data.train_exclude`); `data/ViMedCSS` gốc giữ nguyên.
+V3 sửa cách chia ViMedCSS; V4 thêm SpecAugment; V5 dùng beam 5; V6 đổi sang PhoWhisper-medium. **Đây là tiến trình thử nghiệm**, không phải ablation một biến cho mọi bước: V6 thay cả backbone, learning rate và số epoch. [Bảng số và phân tích](reports/task2_20261030/TASK2_REPORT_VI.md).
 
-## Quy trình
+## Xem kết quả không cần GPU
 
-**1. Chuẩn bị dữ liệu (một lần, nên chạy trên máy local)**
+[ARS/](ARS/) chứa **7 notebook có sẵn output**: dữ liệu, baseline, V1, V2, V-Final, thử nghiệm thành phần và tính khả thi. Có thể mở để đọc bảng, hình và log mà không tải mô hình hoặc huấn luyện lại. Xem [hướng dẫn ARS](ARS/README.md).
+
+| Tài liệu | Nội dung |
+|:--|:--|
+| [Báo cáo tiếng Việt](reports/task2_20261030/TASK2_REPORT_VI.md) | Phương pháp, kết quả, phân tích lỗi và giới hạn |
+| [Bảng và biểu đồ](reports/task2_20261030/) | Số liệu và hình dùng trong báo cáo |
+| [Slide Task 2](reports/task2_20261030/web_slides/) | Bản HTML và PowerPoint |
+| [Kết quả local](results/local_runs/) | `metrics.json`, `predictions.jsonl`, lịch sử huấn luyện |
+| [Kết quả Colab](experiments/) | Cấu hình, nhật ký và kết quả đánh giá |
+
+## Tái lập thí nghiệm
+
+**Yêu cầu:** Python, PyTorch/CUDA phù hợp GPU, và bốn corpus VIVOS, FLEURS `vi_vn`, VietMed, ViMedCSS đã tải riêng. Repo **không chứa** audio, Parquet, trọng số mô hình hay adapter LoRA. Các thư viện Python nằm trong [requirements.txt](requirements.txt); môi trường và GPU của từng lần chạy được ghi trong `runs.jsonl`/manifest.
+
+Từ thư mục `ASR/`:
 
 ```bash
-cd ASR
-pip install -r requirements.txt          # hoặc chỉ: pyarrow soundfile soxr numpy
+pip install -r requirements.txt
 python scripts/prepare_data.py --raw-dir ../dataset/ASR
+python scripts/evaluate.py B0_phowhisper_small_zeroshot --split dev
+python scripts/train.py V1_phowhisper_small_lora
+python scripts/evaluate.py V1_phowhisper_small_lora --split dev
 ```
 
-Mọi nguồn được đưa về một schema, audio 16 kHz mono FLAC. Kết quả: `data/<SOURCE>/{train,dev,test}.parquet`, `ViMedCSS/hard.parquet` và `data/registry.json` (số dòng, số giờ, số group, sha256). Chạy lại sẽ bỏ qua các file đã có (thêm `--overwrite` để tạo lại).
+`prepare_data.py` đưa audio về **16 kHz mono FLAC** trong Parquet và tạo `data/registry.json`. Cấu hình mỗi thí nghiệm kế thừa [mặc định chung](experiments/_base.yaml); không sửa config của một lần chạy đã có kết quả. Trên GPU 6 GB, xem [manifest V1 local](results/local_runs/V1_phowhisper_small_lora/local_v1/manifest.json): batch 1, tích lũy gradient 32, `fp16`, seed 13. [Cấu hình V1](experiments/V1_phowhisper_small_lora/config.yaml) trong repo đặt batch 16 cho GPU nhiều bộ nhớ hơn.
 
-| Nguồn | Split | Group (không tách qua split) |
-|---|---|---|
-| VIVOS | train/test chính thức; dev = ~5% speaker của train (hash cố định) | speaker |
-| FLEURS vi_vn | train/dev/test chính thức | sentence id |
-| VietMed | train/dev/test chính thức | bản ghi gốc |
-| ViMedCSS | train/validation→dev/test/hard chính thức | video nguồn |
+> TEST/HARD được giữ để đánh giá sau khi chọn mô hình trên DEV. `evaluate.py --split test|hard` yêu cầu `--allow-test`; xem [quy trình và bản chốt](reports/task2_20261030/TASK2_REPORT_VI.md) trước khi chạy.
 
-Không dùng: **VietMed-NER** (audio có khả năng trùng VietMed → leakage), **TED2020** (chỉ có text), **MultiMed-ST tiếng Việt** (`dataset/MT/MultiMed-ST_Vietnamese`): là VietMed chia lại kèm bản dịch — train/eval của nó trộn VietMed train và DEV (2.319 câu VietMed DEV nằm trong MultiMed-ST train), `corrected.test` = VietMed TEST. Không dùng làm dữ liệu ASR, và phía MT không train trên nó nếu còn đánh giá trên VietMed DEV/TEST.
+## Cấu trúc repo
 
-**2. Đưa lên Drive**: upload cả thư mục `ASR/` (gồm `data/`) vào `MyDrive/DPL/ASR`.
+| Đường dẫn | Vai trò |
+|:--|:--|
+| [`asr/`](asr/) | Đọc dữ liệu, dựng mô hình/LoRA, chấm WER/CER và thuật ngữ |
+| [`scripts/`](scripts/) | Chuẩn bị dữ liệu, train, evaluate và dựng báo cáo |
+| [`experiments/`](experiments/) | Cấu hình theo ID, kết quả, dự đoán, nhật ký |
+| [`results/local_runs/`](results/local_runs/) | Bản xuất kết quả từ các lần chạy trên laptop |
+| [`ARS/`](ARS/) | Notebook trình bày với output đã lưu |
+| [`reports/task2_20261030/`](reports/task2_20261030/) | Báo cáo, bảng, hình và slide |
+| [`notebooks/local/`](notebooks/local/) | Notebook huấn luyện và đánh giá gốc |
 
-**3. Mở `colab.ipynb` trên Colab** (Runtime → T4 GPU) và chạy lần lượt các cell.
+## Cách đọc kết quả và giới hạn
 
-Lệnh tương đương:
+- **Hai DEV khác nhau:** DEV chính thức có 5.168 clip; DEV chia theo video có 4.978 clip. Chỉ so WER khi cùng tập và cùng cách chấm.
+- **Rò rỉ video trong split gốc:** 92,7% clip ViMedCSS DEV thuộc video cũng có trong Train. Nhóm chia lại theo video cho V3–V6; V-Final dùng Train chính thức để đánh giá trên TEST/HARD chính thức. Đọc [phân tích split](reports/task2_20261030/TASK2_REPORT_VI.md) trước khi suy diễn khả năng tổng quát.
+- **So với paper:** dữ liệu huấn luyện, chuẩn hóa văn bản và cách tính CS-WER khác nhau. Số WER đặt cạnh paper là đối chiếu có điều kiện, không chứng minh phương pháp của nhóm tốt hơn paper.
+- **Ứng dụng:** phù hợp để tạo bản nháp có người rà soát. Thuật ngữ hiếm, lỗi biên clip và tốc độ cả chuỗi ASR→MT vẫn cần kiểm tra trước khi dùng như sản phẩm độc lập.
 
-```bash
-python scripts/evaluate.py B0_phowhisper_small_zeroshot --split dev --data-dir /content/data
-python scripts/train.py    V1_phowhisper_small_lora              --data-dir /content/data
-python scripts/evaluate.py V1_phowhisper_small_lora   --split dev --data-dir /content/data
-```
-
-## Tái lập và an toàn kết quả
-
-- **Resume**: checkpoint ghi thẳng lên Drive; Colab ngắt kết nối thì chạy lại `train.py`, nó tiếp tục từ checkpoint mới nhất (gồm optimizer, scheduler, trạng thái RNG).
-- **Seed** cố định (`seed` trong config) cho model, thứ tự dữ liệu và việc lấy mẫu theo giờ.
-- **`runs.jsonl`** lưu config đã merge, phiên bản thư viện, GPU và `registry.json` của dữ liệu ở mỗi lần chạy.
-- **TEST bị khóa**: `evaluate.py --split test|hard` bắt buộc `--allow-test`. Chỉ dùng sau khi đã chốt model và config trên DEV.
-- **Prior exposure**: PhoWhisper đã được fine-tune trên VIVOS, nên số liệu VIVOS của các model PhoWhisper bị lạc quan. Luôn báo cáo WER theo từng nguồn (`metrics.json → by_source`).
-- `cs_term_recall` (chỉ có ở ViMedCSS) là chỉ số xấp xỉ, kiểm tra thuật ngữ bằng khớp chuỗi con. Nó không phải CS-WER đầy đủ.
+**Nhóm 2 · DPL302m, FPT University:** Nguyen Luong Hai Dang, Tran Trung Tin, Vo Hieu Thang. GVHD: Nguyen Xuan Huy.
